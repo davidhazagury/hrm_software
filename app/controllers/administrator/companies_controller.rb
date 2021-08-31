@@ -10,7 +10,7 @@ class Administrator::CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-     authorize @company
+     authorize [:administrator, @company]
     if @company.save
 
       redirect_to companies_path, notice: "Compañia creada correctamente."
@@ -21,12 +21,12 @@ class Administrator::CompaniesController < ApplicationController
 
   def edit
     @company = Company.find(params[:id])
-     authorize @company
+     authorize [:administrator, @company]
   end
 
   def update
     @company = Company.find(params[:id])
-     authorize @company
+     authorize [:administrator, @company]
     if @company.update(company_params)
       redirect_to companies_path, notice: "Compañia actualizada correctamente."
     else
