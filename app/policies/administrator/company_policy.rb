@@ -1,10 +1,9 @@
-class CompanyPolicy < ApplicationPolicy
+class Administrator::CompanyPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
     end
   end
-
   def new?
     user.role? :admin
   end
@@ -23,5 +22,4 @@ class CompanyPolicy < ApplicationPolicy
   def destroy?
     user.role? :admin
   end
-
 end

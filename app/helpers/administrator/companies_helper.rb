@@ -1,0 +1,2 @@
+module Administrator::CompaniesHelper
+end
