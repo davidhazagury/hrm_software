@@ -1,7 +1,9 @@
 class Administrator::CompanyPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      if user.role? :admin
+        scope.all
+      end
     end
   end
   def new?
