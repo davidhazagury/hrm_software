@@ -1,4 +1,5 @@
 class Administrator::TypeOfShiftPolicy < ApplicationPolicy
+  # Only site admins can CRUD Type Of Shifts
   class Scope < Scope
     def resolve
       if user.role? :admin
