@@ -1,4 +1,5 @@
 class Administrator::TypeOfContractPolicy < ApplicationPolicy
+  # Only site admins can CRUD Type Of Contracts
   class Scope < Scope
     def resolve
       if user.role? :admin

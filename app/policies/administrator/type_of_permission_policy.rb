@@ -1,5 +1,5 @@
-class Administrator::PositionPolicy < ApplicationPolicy
-  # Only site admins can CRUD Positions
+class Administrator::TypeOfPermissionPolicy < ApplicationPolicy
+  # Only site admins can CRUD Type Of Permissions
   class Scope < Scope
     def resolve
       if user.role? :admin
