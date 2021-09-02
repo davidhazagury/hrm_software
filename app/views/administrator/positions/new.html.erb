@@ -1,0 +1,4 @@
+<%= simple_form_for [:administrator, @position] do |f| %>
+  <%= f.input :name_of_position, required: true %>
+  <%= f.submit "Añadir", class: "btn btn_cta"  %>
+<% end %>
