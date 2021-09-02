@@ -1,5 +1,5 @@
-class Administrator::LevelPolicy < ApplicationPolicy
-  # Only site admins can CRUD Levels
+class Administrator::GroupPolicy < ApplicationPolicy
+  # Only site admins can CRUD Groups
   class Scope < Scope
     def resolve
       if user.role? :admin
@@ -7,9 +7,11 @@ class Administrator::LevelPolicy < ApplicationPolicy
       end
     end
   end
+
   def new?
     user.role? :admin
   end
+
   def create?
     user.role? :admin
   end
@@ -25,4 +27,5 @@ class Administrator::LevelPolicy < ApplicationPolicy
   def destroy?
     user.role? :admin
   end
+
 end
