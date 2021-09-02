@@ -1,4 +1,5 @@
 class Administrator::CompanyPolicy < ApplicationPolicy
+  # Only site admins can CRUD Companies
   class Scope < Scope
     def resolve
       if user.role? :admin
