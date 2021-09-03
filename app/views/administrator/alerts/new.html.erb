@@ -1,0 +1,5 @@
+<%= simple_form_for [:administrator,@alert] do |f| %>
+  <%= f.input :name_of_alert, required:true %>
+  <%= f.input :description, required: true %>
+  <%= f.submit "Añadir" %>
+<% end %>
