@@ -1,0 +1,2 @@
+module Administrator::AlertsHelper
+end
