@@ -11,7 +11,7 @@ class Administrator::AlertsController < ApplicationController
     @alert = Alert.new(alert_params)
     authorize [:administrator, @alert]
     if @alert.save
-      redirect_to administrator_arlert_path, notice: "Alerta creada correctamente."
+      redirect_to administrator_alerts_path, notice: "Alerta creada correctamente."
     else
       render :new
     end
@@ -45,6 +45,6 @@ class Administrator::AlertsController < ApplicationController
   private
 
   def alert_params
-    params.require(:alert).permit(:name_of_alert)
+    params.require(:alert).permit(:name_of_alert, :description)
   end
 end
