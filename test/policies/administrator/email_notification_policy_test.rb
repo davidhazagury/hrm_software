@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Administrator::AlertPolicyTest < ActiveSupport::TestCase
+class Administrator::EmailNotificationPolicyTest < ActiveSupport::TestCase
   def test_scope
   end
 
