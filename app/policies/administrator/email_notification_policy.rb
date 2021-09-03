@@ -1,5 +1,5 @@
-class Administrator::AlertPolicy < ApplicationPolicy
-  # Only site admins can CRUD Alerts
+class Administrator::EmailNotificationPolicy < ApplicationPolicy
+  # Only site admins can CRUD Types Of Email Notifications
   class Scope < Scope
     def resolve
       if user.role? :admin

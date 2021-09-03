@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class AlertTest < ActiveSupport::TestCase
+class EmailNotificationTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
