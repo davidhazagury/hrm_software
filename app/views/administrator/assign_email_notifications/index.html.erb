@@ -1,0 +1,6 @@
+<%= @user.email  %>
+<ul>
+  <% @notifications.each do |n|  %>
+    <li><%= n.notification %></li>
+  <% end %>
+</ul>

@@ -9,8 +9,10 @@ class User < ApplicationRecord
 
   has_many :assignments
   has_many :roles, through: :assignments
+  has_many :assign_email_notifications
+  has_many :email_notifications, through: :assign_email_notifications
 
   def role?(role)
-  roles.any? { |r| r.role_name.underscore.to_sym == role }
-end
+    roles.any? { |r| r.role_name.underscore.to_sym == role }
+  end
 end
