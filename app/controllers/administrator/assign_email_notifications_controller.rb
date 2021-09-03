@@ -1,0 +1,2 @@
+class Administrator::AssignEmailNotificationsController < ApplicationController
+end
