@@ -1,6 +1,15 @@
 <%= @user.email  %>
+
+<% form_tag(:action => "update", {:class => "form"}) do %>
+
+<% end -%>
+
+
+
+
 <ul>
   <% @notifications.each do |n|  %>
     <li><%= n.notification %></li>
   <% end %>
 </ul>
+

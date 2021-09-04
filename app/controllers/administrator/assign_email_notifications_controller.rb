@@ -3,4 +3,9 @@ class Administrator::AssignEmailNotificationsController < ApplicationController
     @user = User.find(params[:user_id])
     @notifications = EmailNotification.all
   end
+
+  def assign_email_notifications
+    raise
+  end
+
 end

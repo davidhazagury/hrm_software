@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  after_create :assign_user_to_email_notifications
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   #We have turn on the timeout => which automatically logs the user out after 2 hours(set it by us), and the trackable
@@ -14,5 +15,18 @@ class User < ApplicationRecord
 
   def role?(role)
     roles.any? { |r| r.role_name.underscore.to_sym == role }
+  end
+
+  private
+  # After the site admin has created a new user, we want to assign all types of email notifications to that user, so that
+  # all email notifications are deactivated and we will choose which ones should have activated after.
+
+  def assign_user_to_email_notifications
+    # For each type of notification, we want to create an assignEmailNotification active = false for that user.
+    if !EmailNotification.all.empty?
+      EmailNotification.all.each do |en|
+       AssignEmailNotification.create(user_id: self.id, email_notification_id: en.id)
+      end
+    end
   end
 end
