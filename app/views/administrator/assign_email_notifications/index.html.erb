@@ -1,15 +1,10 @@
-<%= @user.email  %>
+User: <%= @user.email  %>
+    <ul>
+      <% @notifications.each do |n| %>
+        <li>
+          <%= n.email_notification.notification %><%= link_to  "#{n.display_status}", administrator_change_status_path(@user.id, n.id), method: :put, remote:true %>
+        </li>
+      <% end %>
+    </ul>
 
-<% form_tag(:action => "update", {:class => "form"}) do %>
-
-<% end -%>
-
-
-
-
-<ul>
-  <% @notifications.each do |n|  %>
-    <li><%= n.notification %></li>
-  <% end %>
-</ul>
 

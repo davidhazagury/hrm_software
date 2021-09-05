@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_04_054101) do
+ActiveRecord::Schema.define(version: 2021_09_04_064717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2021_09_04_054101) do
     t.bigint "email_notification_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "active", default: false
     t.index ["email_notification_id"], name: "index_assign_email_notifications_on_email_notification_id"
     t.index ["user_id"], name: "index_assign_email_notifications_on_user_id"
   end
@@ -56,7 +57,6 @@ ActiveRecord::Schema.define(version: 2021_09_04_054101) do
     t.string "description"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "active", default: false
   end
 
   create_table "genres", force: :cascade do |t|

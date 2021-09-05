@@ -7,6 +7,9 @@ class Administrator::AssignEmailNotificationPolicy < ApplicationPolicy
       end
     end
   end
+  def index?
+    true
+  end
   def new?
     user.role? :admin
   end
