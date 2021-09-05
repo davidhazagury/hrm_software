@@ -1,19 +1,19 @@
 class User < ApplicationRecord
-  attr_accessor :selected_email
   after_create :assign_user_to_email_notifications
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true, uniqueness: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   #We have turn on the timeout => which automatically logs the user out after 2 hours(set it by us), and the trackable
   #module to being able to track users.
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :trackable, :timeoutable
+  devise :database_authenticatable,
+         :recoverable, :rememberable, :validatable
 
   has_many :assignments
   has_many :roles, through: :assignments
   has_many :assign_email_notifications
   has_many :email_notifications, through: :assign_email_notifications
-  accepts_nested_attributes_for :email_notifications
   def role?(role)
     roles.any? { |r| r.role_name.underscore.to_sym == role }
   end
