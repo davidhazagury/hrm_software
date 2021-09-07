@@ -3,6 +3,7 @@ class Administrator::UsersManagementController < ApplicationController
   # That's why we need to callback this function, to make sure ONLY Site admins can CRUD users.
   before_action :check_if_user_is_admin
   after_action :send_welcome_email_to_user, only: [:create]
+  before_action :destroy_assignments_associated_to_user, only: [:destroy]
   def index
     @users = User.all
   end
@@ -21,6 +22,15 @@ class Administrator::UsersManagementController < ApplicationController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to administrator_users_path, notice: 'User eliminado correctamente'
+    else
+      render :index, alert: 'No se ha podido eliminar el usuario'
+    end
+  end
+
   private
 
   def check_if_user_is_admin
@@ -32,6 +42,13 @@ class Administrator::UsersManagementController < ApplicationController
 
   def send_welcome_email_to_user
     # AFTE CREATING A USER AN EMAIL WELCOMING HIM/HER WITH HIS/HER PASSWORD WILL BE SEND!
+  end
+
+  def destroy_assignments_associated_to_user
+    # Due to the N:N association, we need first to delete the associtions of the user before deleting the user
+    @user = User.find(params[:id])
+    @user.assignments.destroy_all
+    @user.assign_email_notifications.destroy_all
   end
 
   def user_params
