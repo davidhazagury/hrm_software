@@ -3,6 +3,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
+  validates :roles, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   #We have turn on the timeout => which automatically logs the user out after 2 hours(set it by us), and the trackable
@@ -16,6 +17,14 @@ class User < ApplicationRecord
   has_many :email_notifications, through: :assign_email_notifications
   def role?(role)
     roles.any? { |r| r.role_name.underscore.to_sym == role }
+  end
+
+  def set_users_password
+    number_chain = []
+    5.times do
+      number_chain.push((0...9).to_a.sample())
+    end
+    return "#{first_name}#{number_chain.join("")}"
   end
 
   private
