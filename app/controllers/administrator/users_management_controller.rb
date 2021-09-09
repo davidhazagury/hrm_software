@@ -31,6 +31,19 @@ class Administrator::UsersManagementController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to administrator_users_path, notice: 'Usuario actualizado correctamente'
+    else
+      render :edit, alert:'No se ha podido actualizar al usuario'
+    end
+  end
+
   private
 
   def check_if_user_is_admin
