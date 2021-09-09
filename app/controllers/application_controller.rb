@@ -22,6 +22,10 @@ private
 
   def user_not_authorized
     flash[:alert] = 'You are not authorized to perform this action.'
-    redirect_to(request.referrer)# || root_path
+    request.referrer.nil? ? root_path : redirect_to(request.referrer)
+  end
+
+  def after_sign_out_path_for(resource)
+    root_path
   end
 end
