@@ -1,5 +1,6 @@
 class Administrator::AssignEmailNotificationsController < ApplicationController
   def index
+    raise
     @user = User.find(params[:user_id])
     @notifications = @user.assign_email_notifications
     authorize [:administrator, @notifications]
