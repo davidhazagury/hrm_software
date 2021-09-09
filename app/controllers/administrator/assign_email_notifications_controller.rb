@@ -17,5 +17,4 @@ class Administrator::AssignEmailNotificationsController < ApplicationController
       redirect_to administrator_user_email_notifications_path, alert: " La alerta no se ha podido actualizar correctamente"
     end
   end
-
 end

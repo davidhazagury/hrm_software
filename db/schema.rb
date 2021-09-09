@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_04_064717) do
+ActiveRecord::Schema.define(version: 2021_09_09_041058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,8 +132,73 @@ ActiveRecord::Schema.define(version: 2021_09_04_064717) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "workers", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.date "birth_date"
+    t.date "end_date"
+    t.string "sin_num"
+    t.string "personal_email"
+    t.string "ga_email"
+    t.string "id_num"
+    t.string "phone_number"
+    t.string "bank_account"
+    t.string "job"
+    t.integer "annual_salary"
+    t.boolean "active", default: true
+    t.integer "vacation_counter", default: 0
+    t.date "trial_period"
+    t.bigint "type_of_contract_id"
+    t.bigint "department_id"
+    t.bigint "genre_id"
+    t.integer "previous_year_vacation_counter", default: 0
+    t.bigint "type_of_shift_id"
+    t.bigint "work_center_id", default: 1
+    t.bigint "company_id", default: 1
+    t.bigint "position_id"
+    t.string "created_by"
+    t.string "modified_by"
+    t.bigint "group_id"
+    t.bigint "level_id"
+    t.bigint "area_id"
+    t.integer "worker_number"
+    t.integer "notice_period"
+    t.string "type_of_street"
+    t.string "street_name"
+    t.string "street_number"
+    t.string "building_door"
+    t.string "building_stair"
+    t.string "building_floor"
+    t.string "floor_door"
+    t.string "province"
+    t.string "state"
+    t.string "postal_code"
+    t.index ["area_id"], name: "index_workers_on_area_id"
+    t.index ["company_id"], name: "index_workers_on_company_id"
+    t.index ["department_id"], name: "index_workers_on_department_id"
+    t.index ["genre_id"], name: "index_workers_on_genre_id"
+    t.index ["group_id"], name: "index_workers_on_group_id"
+    t.index ["level_id"], name: "index_workers_on_level_id"
+    t.index ["position_id"], name: "index_workers_on_position_id"
+    t.index ["type_of_contract_id"], name: "index_workers_on_type_of_contract_id"
+    t.index ["type_of_shift_id"], name: "index_workers_on_type_of_shift_id"
+    t.index ["work_center_id"], name: "index_workers_on_work_center_id"
+  end
+
   add_foreign_key "assign_email_notifications", "email_notifications"
   add_foreign_key "assign_email_notifications", "users"
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
+  add_foreign_key "workers", "areas"
+  add_foreign_key "workers", "companies"
+  add_foreign_key "workers", "departments"
+  add_foreign_key "workers", "genres"
+  add_foreign_key "workers", "groups"
+  add_foreign_key "workers", "levels"
+  add_foreign_key "workers", "positions"
+  add_foreign_key "workers", "type_of_contracts"
+  add_foreign_key "workers", "type_of_shifts"
+  add_foreign_key "workers", "work_centers"
 end
