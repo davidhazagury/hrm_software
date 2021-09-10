@@ -7,9 +7,11 @@ class WorkerPolicy < ApplicationPolicy
       end
     end
   end
+
   def new?
     (user.role? :admin) || (user.role? :hr_superadmin)
   end
+
   def create?
     (user.role? :admin) || (user.role? :hr_superadmin)
   end

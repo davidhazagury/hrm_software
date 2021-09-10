@@ -9,14 +9,23 @@ class WorkersController < ApplicationController
   end
 
   def create
-    @worker = Worker.new()
+    @worker = Worker.new(worker_params)
     authorize @worker
-    if @worker.save(worker_params)
+    @worker.set_company_and_work_center
+    if @worker.save!
+      redirect_to workers_path, notice: "#{@worker.first_name} creado correctamente"
     else
-      render :new
+      render :new, alert: 'Revisar errores'
     end
   end
 
   private
 
+  def worker_params
+    params.require(:worker).permit(:first_name, :last_name, :birth_date, :start_date,
+                                   :department_id, :sin_num, :personal_email, :ga_email,
+                                   :id_num, :type_of_contract_id, :genre_id, :phone_number,
+                                   :bank_account, :type_of_shift_id, :position_id, :group_id,
+                                   :level_id, :area_id, :trial_period, :notice_period, :annual_salary)
+  end
 end
