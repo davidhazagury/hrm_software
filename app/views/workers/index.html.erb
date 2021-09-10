@@ -1,0 +1,6 @@
+<ol>
+  <% @workers.each do |worker| %>
+    <li><%= worker.first_name %></li>
+  <% end %>
+</ol>
+<%= link_to "Cerrar sesión", destroy_user_session_path, :method => :delete  %>
