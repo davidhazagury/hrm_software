@@ -1,0 +1,5 @@
+<ul>
+  <% @roles.each do |l|  %>
+    <li><%= l.role_name%>  |  <%= l.users.count %></li>
+  <% end %>
+</ul>
