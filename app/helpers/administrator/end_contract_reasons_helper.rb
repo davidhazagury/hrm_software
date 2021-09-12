@@ -1,0 +1,2 @@
+module Administrator::EndContractReasonsHelper
+end
