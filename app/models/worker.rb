@@ -26,8 +26,16 @@ class Worker < ApplicationRecord
   belongs_to :type_of_shift
   belongs_to :work_center
 
+  before_create :set_vacations
+
   def set_company_and_work_center
     self.company_id = 1
     self.work_center_id =1
+  end
+
+  private
+
+  def set_vacations
+    raise
   end
 end
