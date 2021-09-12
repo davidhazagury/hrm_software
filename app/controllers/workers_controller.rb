@@ -13,9 +13,29 @@ class WorkersController < ApplicationController
     authorize @worker
     @worker.set_company_and_work_center
     if @worker.save!
-      redirect_to workers_path, notice: "#{@worker.first_name} creado correctamente"
+      redirect_to worker_path(@worker), notice: "#{@worker.first_name} creado correctamente"
     else
       render :new, alert: 'Revisar errores'
+    end
+  end
+
+  def show
+    @worker = Worker.find(params[:id])
+    authorize @worker
+  end
+
+  def edit
+    @worker = Worker.find(params[:id])
+    authorize @worker
+  end
+
+  def update
+    @worker = Worker.find(params[:id])
+    authorize @worker
+    if @worker.update!(worker_params)
+      redirect_to worker_path(@worker), notice: "#{@worker.first_name} actualizado correctamente"
+    else
+      render :edit, alert: "Revisar errores."
     end
   end
 

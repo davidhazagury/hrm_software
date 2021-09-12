@@ -1,5 +1,6 @@
 class WorkerPolicy < ApplicationPolicy
-  # Only site admins adn HR Admins can CRUD Workers
+  # Only site admins adn HR Admins can CUD Workers
+  #Show is allow for all types of users
   class Scope < Scope
     def resolve
       if (user.role? :admin) || (user.role? :hr_superadmin) || (user.role? :guest)
@@ -27,4 +28,9 @@ class WorkerPolicy < ApplicationPolicy
   def destroy?
     (user.role? :admin) || (user.role? :hr_superadmin)
   end
+
+  def show?
+    true
+  end
+
 end
