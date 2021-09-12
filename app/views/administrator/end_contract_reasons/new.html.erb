@@ -1,0 +1,4 @@
+<%= simple_form_for [:administrator, @reason] do |f| %>
+  <%= f.input :name_of_end_reason, required:true %>
+  <%= f.submit "Añadir", class: "btn btn_cta"  %>
+<% end %>

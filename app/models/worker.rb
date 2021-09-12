@@ -25,6 +25,7 @@ class Worker < ApplicationRecord
   belongs_to :type_of_contract
   belongs_to :type_of_shift
   belongs_to :work_center
+  belongs_to :end_contract_reason, optional: true
 
   before_create :set_vacations
 
