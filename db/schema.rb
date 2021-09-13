@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_12_143826) do
+ActiveRecord::Schema.define(version: 2021_09_13_045658) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,9 +182,11 @@ ActiveRecord::Schema.define(version: 2021_09_12_143826) do
     t.string "state"
     t.string "postal_code"
     t.date "start_date"
+    t.bigint "end_contract_reason_id"
     t.index ["area_id"], name: "index_workers_on_area_id"
     t.index ["company_id"], name: "index_workers_on_company_id"
     t.index ["department_id"], name: "index_workers_on_department_id"
+    t.index ["end_contract_reason_id"], name: "index_workers_on_end_contract_reason_id"
     t.index ["genre_id"], name: "index_workers_on_genre_id"
     t.index ["group_id"], name: "index_workers_on_group_id"
     t.index ["level_id"], name: "index_workers_on_level_id"
@@ -201,6 +203,7 @@ ActiveRecord::Schema.define(version: 2021_09_12_143826) do
   add_foreign_key "workers", "areas"
   add_foreign_key "workers", "companies"
   add_foreign_key "workers", "departments"
+  add_foreign_key "workers", "end_contract_reasons"
   add_foreign_key "workers", "genres"
   add_foreign_key "workers", "groups"
   add_foreign_key "workers", "levels"
