@@ -1,5 +1,5 @@
-class PermissionPolicy < ApplicationPolicy
-  # Only site admins adn HR Admins can CUD Permissions
+class SickPolicy < ApplicationPolicy
+   # Only site admins adn HR Admins can CUD Sicks
   # Show is allow for all types of users
   class Scope < Scope
     def resolve

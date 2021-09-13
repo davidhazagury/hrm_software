@@ -16,6 +16,7 @@ class Worker < ApplicationRecord
 
   # **** RELATIONS ****
   has_many :permissions
+  has_many :sicks
   belongs_to :area
   belongs_to :company
   belongs_to :department

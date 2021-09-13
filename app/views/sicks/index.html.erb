@@ -1,0 +1,16 @@
+Bajas de: <%= @worker.first_name %>
+
+<ol>
+  <% @sicks.each do |s| %>
+    <li>
+        <ul>
+          <li>Comienzo: <%= s.start_date_sickness %> </li>
+          <li>Reincorporación: <%= s.rejoin_date_sickness %> </li>
+          <li>Comentarios: <%= s.comment %> </li>
+          <li>Parte baja: <%= s.doctor_note_sickeness %> </li>
+          <li>Parte alta: <%= s.rejoin_note_sickeness %> </li>
+          <li>Tipo: <%= s.type_of_sickness %> </li>
+        </ul>
+    </li>
+  <% end %>
+</ol>
