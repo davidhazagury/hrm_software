@@ -12,9 +12,10 @@ class Worker < ApplicationRecord
   validates :id_num, presence: true, uniqueness: true, format: {with:/([A-Z]|[0-9])[0-9]{7}([A-Z])/, message:'Introducir DNI ó NIE válido'}
   validates :phone_number, presence: true, uniqueness: true, format: {with:/(6|7)([0-9]){8}/, message:'Introducir número válido'}
   validates :bank_account, presence: true, uniqueness: true, format: {with:/([A-Z]{2})([0-9]{22})/, message:'Introducir IBAN válido'}
-  validates :annual_salary, presence: true, format: {with:/[0-9]*/i, message:'Introducir formato válido'}
+  validates :annual_salary, presence: true, numericality: { only_integer: true }
 
   # **** RELATIONS ****
+  has_many :permissions
   belongs_to :area
   belongs_to :company
   belongs_to :department
