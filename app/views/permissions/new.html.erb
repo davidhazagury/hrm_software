@@ -1,0 +1,9 @@
+<%= simple_form_for [ @worker, @permission ] do |f| %>
+    <%= f.input :permission_start_date, required: true, as: :date,html5: true  %>
+    <%= f.input :permission_rejoin_date, required: true, as: :date,html5: true %>
+  <%= f.association :type_of_permission, label_method: :name_of_permission, value_method: :id, prompt: 'Seleccionar', label:'Tipo de permiso:', required: true%>
+  <%= f.input :note, label:'¿Entrega justificante?' %>
+  <%= f.input :comment, label:'Añadir comentario:', required: true %>
+  <%#= f.file_field :note_file,  label:"Documentación:" %>
+  <%= f.button :button %>
+<% end %>
