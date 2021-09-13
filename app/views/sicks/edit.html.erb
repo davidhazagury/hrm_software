@@ -1,0 +1,11 @@
+<%= simple_form_for [ @worker, @sick ] do |f| %>
+  <%= f.input :start_date_sickness, required: true, as: :date,html5: true  %>
+  <%= f.input :rejoin_date_sickness, required: true, as: :date,html5: true %>
+  <%= f.input :type_of_sickness, collection: [["Por enfermedad", ['IT', 'Accidente laboral']], ['Otros',['Maternidad/Paternidad']]],
+                  as: :grouped_select, group_method: :last, label: 'Tipo de baja:', required: true  %>
+  <%= f.input :doctor_note_sickeness %>
+  <%= f.input :rejoin_note_sickeness %>
+  <%= f.input :comment, required: true %>
+  <%#= f.file_field :note_file,  label:"Documentación:" %>
+  <%= f.button :button %>
+<% end %>

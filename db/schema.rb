@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_13_050500) do
+ActiveRecord::Schema.define(version: 2021_09_13_063610) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,6 +106,19 @@ ActiveRecord::Schema.define(version: 2021_09_13_050500) do
     t.string "role_name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sicks", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "worker_id"
+    t.boolean "doctor_note_sickeness", default: false
+    t.boolean "rejoin_note_sickeness", default: false
+    t.string "comment"
+    t.date "start_date_sickness"
+    t.date "rejoin_date_sickness"
+    t.string "type_of_sickness"
+    t.index ["worker_id"], name: "index_sicks_on_worker_id"
   end
 
   create_table "type_of_contracts", force: :cascade do |t|
@@ -215,6 +228,7 @@ ActiveRecord::Schema.define(version: 2021_09_13_050500) do
   add_foreign_key "assignments", "users"
   add_foreign_key "permissions", "type_of_permissions"
   add_foreign_key "permissions", "workers"
+  add_foreign_key "sicks", "workers"
   add_foreign_key "workers", "areas"
   add_foreign_key "workers", "companies"
   add_foreign_key "workers", "departments"
