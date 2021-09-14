@@ -17,6 +17,7 @@ class Worker < ApplicationRecord
   # **** RELATIONS ****
   has_many :permissions
   has_many :sicks
+  has_one_attached :avatar
   belongs_to :area
   belongs_to :company
   belongs_to :department
@@ -33,12 +34,34 @@ class Worker < ApplicationRecord
 
   def set_company_and_work_center
     self.company_id = 1
-    self.work_center_id =1
+    self.work_center_id = 1
+  end
+
+  def set_avatar
+    # List avatars available in the assets folder (returns an array with the paths)
+    avatars = Dir.glob('app/assets/images/avatars/*')
+    # We want to pick a random avatar, depending on genre.
+    male = []
+    female = []
+    # Split the string and grab the last element => last element == file name
+    avatars.each do |avatar|
+      file_name = avatar.split('/').last.to_s
+      # We have standarized the name of the avatars.
+      if file_name.include? 'woman'
+        female.push(file_name)
+      else
+        male.push(file_name)
+      end
+    end
+
+   # We pick a random avatar, depending on the workers genre
+
+    return self.genre_id == 1 ? female.sample() : male.sample()
   end
 
   private
 
   def set_vacations
-    raise
+
   end
 end

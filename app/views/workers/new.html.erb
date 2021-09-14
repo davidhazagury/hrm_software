@@ -20,6 +20,7 @@
   <%=  f.input :trial_period, collection: [['1', '1 Mes'],['3', '3 Meses'], ['4', '4 Meses'], ['6', '6 Meses']], label_method: :second, value_method: :first, prompt: 'Seleccionar', label:'Periodo de pruebas:',  required: true %>
   <%= f.input :notice_period, label:"Periodo de preaviso:", input_html: {pattern:"^[0-9]{1,45}$", title:"Sólo se aceptan carácteres númericos."} %>
   <%= f.input :annual_salary, label:"Salario bruto anual (en €):", input_html: {type:'text', pattern:"^[0-9]*$", title:'Sólo se admiten caratéres numéricos'},  required: true %>
+  <%= f.file_field :avatar,  label:"Foto:", accept:'image/png, image/jpg' %>
   <%#= f.file_field :files,  label:"Documentación:", multiple: true %>
   <%= f.button :button, class: "btn btn_cta" do %>
     <i class="lni lni-plus"></i> Ficha
