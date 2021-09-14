@@ -1,6 +1,16 @@
 <ol>
   <% @workers.each do |worker| %>
-    <li><%= worker.first_name %></li>
+    <li>
+      <% if worker.avatar.attached? %>
+        <div style="background-image: url(<%= rails_blob_url(worker.avatar) %>);background-position: center;
+                    background-size: cover;    height: 35px; border-radius: 50%; width: 35px;">
+
+        </div>
+      <% else %>
+        <%= image_tag "avatars/#{worker.set_avatar}", alt: "alttext", style:"height: 35px; border-radius: 50%; width: 65px;" %>
+      <% end %>
+      <%= worker.first_name %>
+    </li>
   <% end %>
 </ol>
 <%= link_to "Cerrar sesión", destroy_user_session_path, :method => :delete  %>
