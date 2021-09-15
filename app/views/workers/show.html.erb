@@ -1,1 +1,36 @@
-show.html.erb
+Ficha de: <%= @worker.first_name %> <%= @worker.last_name %>
+<% if @worker.avatar.attached? %>
+  <div style="background-image: url(<%= rails_blob_url(@worker.avatar) %>);background-position: center;
+              background-size: cover;    height: 35px; border-radius: 50%; width: 35px;">
+
+  </div>
+<% else %>
+  <%= image_tag "avatars/#{@worker.set_avatar}", alt: "alttext", style:"height: 35px; border-radius: 50%; width: 65px;" %>
+<% end %>
+<ol>
+  <li>Fecha nacimiento: <%= @worker.birth_date %> </li>
+  <li>Fecha de alta: <%= @worker.start_date %></li>
+  <li>Departamento: <%= @worker.department.name_of_department %></li>
+  <li>SSS: <%= @worker.sin_num %></li>
+  <li>Email: <%= @worker.personal_email %></li>
+  <li>Email GA: <%= @worker.ga_email %></li>
+  <li>ID: <%= @worker.id_num %></li>
+  <li>Tipo de contrato: <%= @worker.type_of_contract.name_type_of_contract %></li>
+  <li>Género: <%= @worker.genre.type_of_genre %></li>
+  <li>Teléfono: <%= @worker.phone_number %></li>
+  <li>IBAN: <%= @worker.bank_account %></li>
+  <li>Tipo de jornada: <%= @worker.type_of_shift.name_of_shift %></li>
+  <li>Posición: <%= @worker.position.name_of_position %></li>
+  <li>Grupo: <%= @worker.group.type_of_group %></li>
+  <li>Nivel: <%= @worker.level.type_of_level %></li>
+  <li>Área: <%= @worker.area.type_of_area %></li>
+  <li>Périodo de pruebas: <%= @worker.trial_period %></li>
+  <li>Periodo de aviso: <%= @worker.notice_period %></li>
+  <li>Salario: <%= @worker.annual_salary %></li>
+</ol>
+Documentos:
+<% if @worker.files.attached? %>
+  <% @worker.files.each do |doc| %>
+    <%= link_to doc.filename, rails_blob_path(doc, disposition: 'preview'),target: "_blank" %>   |
+  <% end %>
+<% end %>
