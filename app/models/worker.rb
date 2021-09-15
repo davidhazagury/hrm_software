@@ -13,12 +13,13 @@ class Worker < ApplicationRecord
   validates :phone_number, presence: true, uniqueness: true, format: {with:/(6|7)([0-9]){8}/, message:'Introducir número válido'}
   validates :bank_account, presence: true, uniqueness: true, format: {with:/([A-Z]{2})([0-9]{22})/, message:'Introducir IBAN válido'}
   validates :annual_salary, presence: true, numericality: { only_integer: true }
-  validates :avatar, content_type: 'image/png',content_type: [:png, :jpg, :jpeg], limit: {min:1, max:1}
-
+  validates :avatar, content_type: 'image/png',content_type: [:png, :jpg, :jpeg], limit: {min: 1, max: 1 }
+  validates :files, content_type: [ :pdf, :doc, :docx, :xls, :xlsx], limit: {min:0, max: 7 }
   # **** RELATIONS ****
   has_many :permissions
   has_many :sicks
   has_one_attached :avatar
+  has_many_attached :files
   belongs_to :area
   belongs_to :company
   belongs_to :department

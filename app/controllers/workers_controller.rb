@@ -47,6 +47,6 @@ class WorkersController < ApplicationController
                                    :id_num, :type_of_contract_id, :genre_id, :phone_number,
                                    :bank_account, :type_of_shift_id, :position_id, :group_id,
                                    :level_id, :area_id, :trial_period, :notice_period,
-                                   :annual_salary, :avatar)
+                                   :annual_salary, :avatar, files: [])
   end
 end
