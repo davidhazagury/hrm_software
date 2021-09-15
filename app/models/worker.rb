@@ -13,6 +13,7 @@ class Worker < ApplicationRecord
   validates :phone_number, presence: true, uniqueness: true, format: {with:/(6|7)([0-9]){8}/, message:'Introducir número válido'}
   validates :bank_account, presence: true, uniqueness: true, format: {with:/([A-Z]{2})([0-9]{22})/, message:'Introducir IBAN válido'}
   validates :annual_salary, presence: true, numericality: { only_integer: true }
+  validates :avatar, content_type: 'image/png',content_type: [:png, :jpg, :jpeg], limit: {min:1, max:1}
 
   # **** RELATIONS ****
   has_many :permissions
