@@ -18,6 +18,7 @@ class Worker < ApplicationRecord
   # **** RELATIONS ****
   has_many :permissions
   has_many :sicks
+  has_many :notes
   has_one_attached :avatar
   has_many_attached :files
   belongs_to :area

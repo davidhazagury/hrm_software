@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_18_063042) do
+ActiveRecord::Schema.define(version: 2021_09_18_073343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,14 @@ ActiveRecord::Schema.define(version: 2021_09_18_063042) do
     t.string "type_of_level"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "worker_id"
+    t.index ["worker_id"], name: "index_notes_on_worker_id"
   end
 
   create_table "periods", force: :cascade do |t|
@@ -254,6 +262,7 @@ ActiveRecord::Schema.define(version: 2021_09_18_063042) do
   add_foreign_key "assign_email_notifications", "users"
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
+  add_foreign_key "notes", "workers"
   add_foreign_key "permissions", "type_of_permissions"
   add_foreign_key "permissions", "workers"
   add_foreign_key "sicks", "workers"
