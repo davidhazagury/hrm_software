@@ -24,4 +24,9 @@ class PeriodPolicy < ApplicationPolicy
   def update?
     (user.role? :admin) || (user.role? :hr_superadmin)
   end
+
+  def destroy?
+    (user.role? :admin) || (user.role? :hr_superadmin)
+  end
+
 end
