@@ -16,7 +16,7 @@ class NotesController < ApplicationController
     @note.worker = @worker
     authorize @note
     if @note.save
-      redirect_to worker_notes_path(@worker), notice: "Permiso creado correctamente"
+      redirect_to worker_notes_path(@worker), notice: "Nota creado correctamente"
     else
       render :new, alert: 'Revisar errores'
     end
@@ -33,15 +33,25 @@ class NotesController < ApplicationController
     @note = Note.find(params[:id])
     authorize @note
     if @note.update(note_params)
-      redirect_to worker_notes_path(@worker), notice: "Permiso actualizado correctamente"
+      redirect_to worker_notes_path(@worker), notice: "Nota actualizado correctamente"
     else
       render :edit, alert: "Revisar errores."
+    end
+  end
+
+  def destroy
+    @note = Note.find(params[:id])
+    authorize @note
+    if @note.destroy
+      redirect_to worker_notes_path(@note.worker), notice: 'Nota eliminada correctamente'
+    else
+      redirect_to worker_notes_path(@note.worker), alert: 'Upss algo fallo'
     end
   end
 
   private
 
   def note_params
-    params.require(:note).permit(:content)
+    params.require(:note).permit(:content, :worker_id)
   end
 end
