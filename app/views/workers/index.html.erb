@@ -1,3 +1,4 @@
+<p>Link para crear nuevo periodo o por formulario?</p>
 <ol>
   <% @workers.each do |worker| %>
     <li>
@@ -10,6 +11,7 @@
         <%= image_tag "avatars/#{worker.set_avatar}", alt: "alttext", style:"height: 35px; border-radius: 50%; width: 65px;" %>
       <% end %>
       <%= worker.first_name %>
+      <%= link_to "Ver", worker_path(worker)  %>
     </li>
   <% end %>
 </ol>
