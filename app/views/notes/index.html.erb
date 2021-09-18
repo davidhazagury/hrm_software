@@ -1,0 +1,11 @@
+Notas de: <%= @worker.first_name %>
+
+<ol>
+  <% @notes.each do |n| %>
+    <li>
+        <ul>
+          <li>C<%= n.content %> </li>
+        </ul>
+    </li>
+  <% end %>
+</ol>
