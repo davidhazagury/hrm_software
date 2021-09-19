@@ -13,11 +13,12 @@ class Administrator::EndContractReasonsController < ApplicationController
     @reason = EndContractReason.new(reason_params)
     authorize [:administrator, @reason]
     if @reason.save
-      redirect_to administrator_end_contract_reasons_path, notice: "Motivo creado correctamente."
+      redirect_to administrator_end_contract_reasons_path, notice: t('admin.end_contract_reason.create.notice')
     else
-      render :new
+      render :new, alert: t('admin.end_contract_reason.create.alert')
     end
   end
+
   def edit
     @reason = EndContractReason.find(params[:id])
     authorize [:administrator, @reason]
@@ -27,9 +28,9 @@ class Administrator::EndContractReasonsController < ApplicationController
     @reason = EndContractReason.find(params[:id])
     authorize [:administrator, @reason]
     if @reason.update(reason_params)
-      redirect_to administrator_end_contract_reasons_path, notice: "Motivo actualizado correctamente."
+      redirect_to administrator_end_contract_reasons_path, notice: t('admin.end_contract_reason.update.notice')
     else
-      render :edit
+      render :edit, t('admin.end_contract_reason.update.alert')
     end
   end
 
@@ -37,9 +38,9 @@ class Administrator::EndContractReasonsController < ApplicationController
     @reason = EndContractReason.find(params[:id])
     authorize [:administrator, @area]
     if @reason.destroy
-      redirect_to administrator_areas_path, notice: "Motivo elimanado correctamente."
+      redirect_to administrator_areas_path, notice: t('admin.end_contract_reason.destroy.notice')
     else
-      redirect_to administrator_end_contract_reasons_path, alert: "No se ha podido eliminar el motivo"
+      redirect_to administrator_end_contract_reasons_path, alert: t('admin.end_contract_reason.destroy.alert')
     end
   end
 
