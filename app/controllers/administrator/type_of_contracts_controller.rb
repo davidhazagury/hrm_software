@@ -12,9 +12,9 @@ class Administrator::TypeOfContractsController < ApplicationController
     @type_of_contract = TypeOfContract.new(contract_params)
     authorize [:administrator, @type_of_contract]
     if @type_of_contract.save
-      redirect_to administrator_type_of_contracts_path, notice: "Contrato creado correctamente."
+      redirect_to administrator_type_of_contracts_path, notice: t('admin.type_of_contract.create.notice')
     else
-      render :new
+      render :new, t('admin.type_of_contract.create.alert')
     end
   end
 
@@ -27,9 +27,9 @@ class Administrator::TypeOfContractsController < ApplicationController
     @type_of_contract = TypeOfContract.find(params[:id])
     authorize [:administrator, @type_of_contract]
     if @type_of_contract.update(contract_params)
-      redirect_to administrator_type_of_contracts_path, notice: "Contrato actualizado correctamente."
+      redirect_to administrator_type_of_contracts_path, notice: t('admin.type_of_contract.update.notice')
     else
-      render :edit
+      render :edit, t('admin.type_of_contract.update.alert')
     end
   end
 
@@ -37,9 +37,9 @@ class Administrator::TypeOfContractsController < ApplicationController
     @type_of_contract = TypeOfContract.find(params[:id])
     authorize [:administrator, @type_of_contract]
     if @level.destroy
-      redirect_to administrator_type_of_contracts_path, notice: "Contrato elimanado correctamente."
+      redirect_to administrator_type_of_contracts_path, notice: t('admin.type_of_contract.destroy.notice')
     else
-      redirect_to administrator_type_of_contracts_path, alert: "No se ha podido eliminar el contrato"
+      redirect_to administrator_type_of_contracts_path, alert: t('admin.type_of_contract.destroy.alert')
     end
   end
 
