@@ -11,9 +11,9 @@ class Administrator::WorkCentersController < ApplicationController
     @work_center = WorkCenter.new(work_center_params)
     authorize [:administrator, @work_center]
     if @work_center.save
-      redirect_to administrator_work_centers_path, notice: "Centro de trabajo creada correctamente."
+      redirect_to administrator_work_centers_path, notice: t('admin.work_center.create.notice')
     else
-      render :new
+      render :new, alert: t('admin.work_center.create.alert')
     end
   end
 
@@ -26,9 +26,9 @@ class Administrator::WorkCentersController < ApplicationController
     @work_center = WorkCenter.find(params[:id])
     authorize [:administrator, @work_center]
     if @work_center.update(work_center_params)
-      redirect_to administrator_work_centers_path, notice: "Centro de trabajo actualizada correctamente."
+      redirect_to administrator_work_centers_path, notice: t('admin.work_center.update.notice')
     else
-      render :edit
+      render :edit, alert: t('admin.work_center.update.alert')
     end
   end
 
@@ -36,9 +36,9 @@ class Administrator::WorkCentersController < ApplicationController
     @work_center = WorkCenter.find(params[:id])
     authorize [:administrator, @work_center]
     if @work_center.destroy
-      redirect_to administrator_work_centers_path, notice: "Centro de trabajo elimanada correctamente."
+      redirect_to administrator_work_centers_path, notice: t('admin.work_center.destroy.notice')
     else
-      redirect_to administrator_work_centers_path, alert: "No se ha podido eliminar el centro de trabajo"
+      redirect_to administrator_work_centers_path, alert: t('admin.work_center.destroy.alert')
     end
   end
 

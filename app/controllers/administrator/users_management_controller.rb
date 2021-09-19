@@ -16,7 +16,7 @@ class Administrator::UsersManagementController < ApplicationController
     @user = User.new(user_params)
     @user.password = @user.set_users_password
     if @user.save
-      redirect_to administrator_users_path, notice: t('admin.tuser_management.create.notice')
+      redirect_to administrator_users_path, notice: t('admin.user_management.create.notice')
     else
       render :new, t('admin.user_management.create.alert')
     end
@@ -25,9 +25,9 @@ class Administrator::UsersManagementController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      redirect_to administrator_users_path, notice: t('admin.tuser_management.destroy.notice')
+      redirect_to administrator_users_path, notice: t('admin.user_management.destroy.notice')
     else
-      render :index, alert: t('admin.tuser_management.destroy.alert')
+      render :index, alert: t('admin.user_management.destroy.alert')
     end
   end
 
@@ -38,9 +38,9 @@ class Administrator::UsersManagementController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to administrator_users_path, notice: t('admin.tuser_management.update.notice')
+      redirect_to administrator_users_path, notice: t('admin.user_management.update.notice')
     else
-      render :edit, alert: t('admin.tuser_management.update.alert')
+      render :edit, alert: t('admin.user_management.update.alert')
     end
   end
 
@@ -49,7 +49,7 @@ class Administrator::UsersManagementController < ApplicationController
   def check_if_user_is_admin
     # Only admins can CRUD users.user
     if !current_user.role? :admin
-      redirect_to root_path, warning: t('admin.tuser_management.check_if_user_is_admin.warning')
+      redirect_to root_path, warning: t('admin.user_management.check_if_user_is_admin.warning')
     end
   end
 
