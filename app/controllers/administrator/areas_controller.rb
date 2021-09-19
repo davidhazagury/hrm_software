@@ -1,6 +1,5 @@
 class Administrator::AreasController < ApplicationController
   def index
-    raise
     @areas = policy_scope([:administrator,Area.order(:type_of_area)])
   end
   def new
@@ -17,6 +16,7 @@ class Administrator::AreasController < ApplicationController
       render :new, t('admin.area.create.alert')
     end
   end
+
   def edit
     @area = Area.find(params[:id])
     authorize [:administrator, @area]

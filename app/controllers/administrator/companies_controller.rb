@@ -1,7 +1,9 @@
 class Administrator::CompaniesController < ApplicationController
+
   def index
     @companies = policy_scope([:administrator, Company.order(:name_of_company)])
   end
+
   def new
     @company = Company.new
     authorize [:administrator, @company]
@@ -11,9 +13,9 @@ class Administrator::CompaniesController < ApplicationController
     @company = Company.new(company_params)
      authorize [:administrator, @company]
     if @company.save
-      redirect_to administrator_companies_path, notice: "Compañia creada correctamente."
+      redirect_to administrator_companies_path, notice: t('admin.company.create.notice')
     else
-      render :new, alert: 'Ha habido un error'
+      render :new, alert: t('admin.company.create.alert')
     end
   end
 
@@ -26,9 +28,9 @@ class Administrator::CompaniesController < ApplicationController
     @company = Company.find(params[:id])
      authorize [:administrator, @company]
     if @company.update(company_params)
-      redirect_to administrator_companies_path, notice: "Compañia actualizada correctamente."
+      redirect_to administrator_companies_path, notice: t('admin.company.update.notice')
     else
-      render :edit, alert: 'Ha habido un error'
+      render :edit, alert: t('admin.company.update.alert')
     end
   end
 
