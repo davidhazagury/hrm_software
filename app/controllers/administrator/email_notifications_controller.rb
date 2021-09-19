@@ -1,7 +1,9 @@
 class Administrator::EmailNotificationsController < ApplicationController
+
   def index
     @alerts = policy_scope([:administrator, EmailNotification.order(:notification)])
   end
+
   def new
     @alert = EmailNotification.new
     authorize [:administrator, @alert]
@@ -11,9 +13,9 @@ class Administrator::EmailNotificationsController < ApplicationController
     @alert = EmailNotification.new(alert_params)
     authorize [:administrator, @alert]
     if @alert.save
-      redirect_to administrator_email_notifications_path, notice: "Alerta creada correctamente."
+      redirect_to administrator_email_notifications_path, notice: t('admin.email_notification.create.notice')
     else
-      render :new
+      render :new, alert: t('admin.email_notification.create.alert')
     end
   end
 
@@ -26,9 +28,9 @@ class Administrator::EmailNotificationsController < ApplicationController
     @alert = EmailNotification.find(params[:id])
     authorize [:administrator, @alert]
     if @alert.update(alert_params)
-      redirect_to administrator_email_notifications_path, notice: "Alerta actualizada correctamente."
+      redirect_to administrator_email_notifications_path, notice: t('admin.email_notification.update.notice')
     else
-      render :edit
+      render :edit, alert: t('admin.email_notification.update.alert')
     end
   end
 
@@ -36,9 +38,9 @@ class Administrator::EmailNotificationsController < ApplicationController
     @alert = EmailNotification.find(params[:id])
     authorize [:administrator, @alert]
     if @alert.destroy
-      redirect_to administrator_email_notifications_path, notice: "Álerta elimanada correctamente."
+      redirect_to administrator_email_notifications_path, notice: t('admin.email_notification.destroy.notice')
     else
-      redirect_to administrator_email_notifications_path, alert: "No se ha podido eliminar el alerta"
+      redirect_to administrator_email_notifications_path, alert: t('admin.email_notification.destroy.alert')
     end
   end
 
