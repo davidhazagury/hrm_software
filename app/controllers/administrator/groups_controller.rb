@@ -12,9 +12,9 @@ class Administrator::GroupsController < ApplicationController
     @group = Group.new(group_params)
     authorize [:administrator, @group]
     if @group.save
-      redirect_to administrator_groups_path, notice: "Grupo creado correctamente."
+      redirect_to administrator_groups_path, notice: t('admin.group.create.notice')
     else
-      render :new
+      render :new, alert: t('admin.group.create.alert')
     end
   end
 
@@ -27,9 +27,9 @@ class Administrator::GroupsController < ApplicationController
     @group = Group.find(params[:id])
     authorize [:administrator, @group]
     if @group.update(group_params)
-      redirect_to administrator_groups_path, notice: "Grupo actualizado correctamente."
+      redirect_to administrator_groups_path, notice: t('admin.group.update.notice')
     else
-      render :edit
+      render :edit, alert: t('admin.group.update.alert')
     end
   end
 
@@ -37,9 +37,9 @@ class Administrator::GroupsController < ApplicationController
     @group = Group.find(params[:id])
     authorize [:administrator, @group]
     if @group.destroy
-      redirect_to administrator_gruops_path, notice: "Grupo elimanado correctamente."
+      redirect_to administrator_gruops_path, notice: t('admin.group.destroy.notice')
     else
-      redirect_to administrator_gruops_path, alert: "No se ha podido eliminar el grupo."
+      redirect_to administrator_gruops_path, alert: t('admin.group.destroy.alert')
     end
   end
 
