@@ -14,7 +14,7 @@ class Administrator::TypeOfShiftsController < ApplicationController
     if @type_of_shift.save
       redirect_to administrator_type_of_shifts_path, notice: t('admin.type_of_shift.create.notice')
     else
-      render :new, t('admin.type_of_shift.create.alert')
+      render :new, alert: t('admin.type_of_shift.create.alert')
     end
   end
 
