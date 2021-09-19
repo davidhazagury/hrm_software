@@ -16,18 +16,18 @@ class Administrator::UsersManagementController < ApplicationController
     @user = User.new(user_params)
     @user.password = @user.set_users_password
     if @user.save
-      redirect_to administrator_users_path, notice: 'Usuario creado correctamente'
+      redirect_to administrator_users_path, notice: t('admin.tuser_management.create.notice')
     else
-      render :new
+      render :new, t('admin.user_management.create.alert')
     end
   end
 
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      redirect_to administrator_users_path, notice: 'User eliminado correctamente'
+      redirect_to administrator_users_path, notice: t('admin.tuser_management.destroy.notice')
     else
-      render :index, alert: 'No se ha podido eliminar el usuario'
+      render :index, alert: t('admin.tuser_management.destroy.alert')
     end
   end
 
@@ -38,9 +38,9 @@ class Administrator::UsersManagementController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to administrator_users_path, notice: 'Usuario actualizado correctamente'
+      redirect_to administrator_users_path, notice: t('admin.tuser_management.update.notice')
     else
-      render :edit, alert:'No se ha podido actualizar al usuario'
+      render :edit, alert: t('admin.tuser_management.update.alert')
     end
   end
 
@@ -49,7 +49,7 @@ class Administrator::UsersManagementController < ApplicationController
   def check_if_user_is_admin
     # Only admins can CRUD users.user
     if !current_user.role? :admin
-      redirect_to root_path, alert: 'No tienes autorización para acceder a este espacio.'
+      redirect_to root_path, warning: t('admin.tuser_management.check_if_user_is_admin.warning')
     end
   end
 
