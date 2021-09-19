@@ -1,7 +1,9 @@
 class Administrator::RolesController < ApplicationController
+
   def index
     @roles = policy_scope([:administrator,Role.order(:role_name)])
   end
+
   def new
     @role = Role.new
     authorize [:administrator, @role]
@@ -11,11 +13,12 @@ class Administrator::RolesController < ApplicationController
     @role = Role.new(role_params)
     authorize [:administrator, @role]
     if @role.save
-      redirect_to administrator_roles_path, notice: "Rol creado correctamente."
+      redirect_to administrator_roles_path, notice: t('admin.role.create.notice')
     else
-      render :new
+      render :new, t('admin.role.create.alert')
     end
   end
+
   def edit
     @role = Role.find(params[:id])
     authorize [:administrator, @role]
@@ -25,9 +28,9 @@ class Administrator::RolesController < ApplicationController
     @role = Role.find(params[:id])
     authorize [:administrator, @role]
     if @role.update(role_params)
-      redirect_to administrator_roles_path, notice: "Rol actualizado correctamente."
+      redirect_to administrator_roles_path, notice: t('admin.role.update.notice')
     else
-      render :edit
+      render :edit, t('admin.role.update.alert')
     end
   end
 
@@ -35,9 +38,9 @@ class Administrator::RolesController < ApplicationController
     @role = Role.find(params[:id])
     authorize [:administrator, @role]
     if @role.destroy
-      redirect_to administrator_roles_path, notice: "Rol elimanado correctamente."
+      redirect_to administrator_roles_path, notice: t('admin.role.destroy.notice')
     else
-      redirect_to administrator_roles_path, alert: "No se ha podido eliminar el role"
+      redirect_to administrator_roles_path, alert: t('admin.role.destroy.alert')
     end
   end
 
