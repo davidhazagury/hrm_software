@@ -12,9 +12,9 @@ class Administrator::PositionsController < ApplicationController
     @position = Position.new(position_params)
     authorize [:administrator, @position]
     if @position.save
-      redirect_to administrator_positions_path, notice: "Posición creada correctamente."
+      redirect_to administrator_positions_path, notice: t('admin.position.create.notice')
     else
-      render :new, alert: 'Ha habido un error'
+      render :new, alert: t('admin.position.create.alert')
     end
   end
 
@@ -27,9 +27,9 @@ class Administrator::PositionsController < ApplicationController
     @position = Position.find(params[:id])
     authorize [:administrator, @position]
     if @position.update(position_params)
-      redirect_to administrator_positions_path, notice: "Posición actualizada correctamente."
+      redirect_to administrator_positions_path, notice: t('admin.position.update.notice')
     else
-      render :edit, alert: 'Ha habido un error'
+      render :edit, alert: t('admin.position.update.alert')
     end
   end
 

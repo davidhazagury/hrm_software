@@ -12,9 +12,9 @@ class Administrator::TypeOfShiftsController < ApplicationController
     @type_of_shift = TypeOfShift.new(shift_params)
     authorize [:administrator, @type_of_shift]
     if @type_of_shift.save
-      redirect_to administrator_type_of_shifts_path, notice: "Turno creado correctamente."
+      redirect_to administrator_type_of_shifts_path, notice: t('admin.type_of_shift.create.notice')
     else
-      render :new
+      render :new, alert: t('admin.type_of_shift.create.alert')
     end
   end
 
@@ -27,9 +27,9 @@ class Administrator::TypeOfShiftsController < ApplicationController
     @type_of_shift = TypeOfShift.find(params[:id])
     authorize [:administrator, @type_of_shift]
     if @type_of_shift.update(shift_params)
-      redirect_to administrator_type_of_shifts_path, notice: "Turno actualizado correctamente."
+      redirect_to administrator_type_of_shifts_path, notice: t('admin.type_of_shift.update.notice')
     else
-      render :edit
+      render :edit, alert: t('admin.type_of_shift.update.alert')
     end
   end
 
@@ -37,9 +37,9 @@ class Administrator::TypeOfShiftsController < ApplicationController
     @type_of_shift = TypeOfShift.find(params[:id])
     authorize [:administrator, @type_of_shift]
     if @type_of_shift.destroy
-      redirect_to administrator_type_of_shifts_path, notice: "Turno elimanado correctamente."
+      redirect_to administrator_type_of_shifts_path, notice: t('admin.type_of_shift.destroy.notice')
     else
-      redirect_to administrator_type_of_shifts_path, alert: "No se ha podido eliminar el turno"
+      redirect_to administrator_type_of_shifts_path, alert: t('admin.type_of_shift.destroy.alert')
     end
   end
 

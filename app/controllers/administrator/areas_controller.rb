@@ -11,11 +11,12 @@ class Administrator::AreasController < ApplicationController
     @area = Area.new(area_params)
     authorize [:administrator, @area]
     if @area.save
-      redirect_to administrator_areas_path, notice: "Area creada correctamente."
+      redirect_to administrator_areas_path, notice: t('admin.area.create.notice')
     else
-      render :new
+      render :new, t('admin.area.create.alert')
     end
   end
+
   def edit
     @area = Area.find(params[:id])
     authorize [:administrator, @area]
@@ -25,9 +26,9 @@ class Administrator::AreasController < ApplicationController
     @area = Area.find(params[:id])
     authorize [:administrator, @area]
     if @area.update(area_params)
-      redirect_to administrator_areas_path, notice: "Area actualizada correctamente."
+      redirect_to administrator_areas_path, notice: t('admin.area.update.notice')
     else
-      render :edit
+      render :edit, t('admin.area.update.alert')
     end
   end
 
@@ -35,9 +36,9 @@ class Administrator::AreasController < ApplicationController
     @area = Area.find(params[:id])
     authorize [:administrator, @area]
     if @area.destroy
-      redirect_to administrator_areas_path, notice: "Área elimanada correctamente."
+      redirect_to administrator_areas_path, notice: t('admin.area.destroy.notice')
     else
-      redirect_to administrator_areas_path, alert: "No se ha podido eliminar el area"
+      redirect_to administrator_areas_path, alert: t('admin.area.destroy.alert')
     end
   end
 

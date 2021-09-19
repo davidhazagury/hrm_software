@@ -12,9 +12,9 @@ class Administrator::GenresController < ApplicationController
     @genre = Genre.new(genre_params)
     authorize [:administrator, @genre]
     if @genre.save
-      redirect_to administrator_genres_path, notice: "Género creado correctamente."
+      redirect_to administrator_genres_path, notice: t('admin.genre.create.notice')
     else
-      render :new
+      render :new, alert: t('admin.genre.create.alert')
     end
   end
 
@@ -27,9 +27,9 @@ class Administrator::GenresController < ApplicationController
     @genre = Genre.find(params[:id])
     authorize [:administrator, @genre]
     if @genre.update(genre_params)
-      redirect_to administrator_genres_path, notice: "Género actualizado correctamente."
+      redirect_to administrator_genres_path, notice: t('admin.genre.update.notice')
     else
-      render :edit
+      render :edit, alert: t('admin.genre.update.alert')
     end
   end
 
@@ -37,9 +37,9 @@ class Administrator::GenresController < ApplicationController
     @genre = Genre.find(params[:id])
     authorize [:administrator, @genre]
     if @genre.destroy
-      redirect_to administrator_genres_path, notice: "Género elimanado correctamente."
+      redirect_to administrator_genres_path, notice: t('admin.genre.destroy.notice')
     else
-      redirect_to administrator_genres_path, alert: "No se ha podido eliminar el género"
+      redirect_to administrator_genres_path, alert: t('admin.genre.destroy.alert')
     end
   end
 
