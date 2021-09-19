@@ -1,7 +1,7 @@
 class Administrator::EndContractReasonsController < ApplicationController
 
   def index
-  @reasons = policy_scope([:administrator,EndContractReason.order(:name_of_end_reason)])
+    @reasons = policy_scope([:administrator,EndContractReason.order(:name_of_end_reason)])
   end
 
   def new
