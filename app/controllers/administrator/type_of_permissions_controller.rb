@@ -12,9 +12,9 @@ class Administrator::TypeOfPermissionsController < ApplicationController
     @type_of_permission = TypeOfPermission.new(permission_params)
     authorize [:administrator, @type_of_permission]
     if @type_of_permission.save
-      redirect_to administrator_type_of_permissions_path, notice: "Turno creado correctamente."
+      redirect_to administrator_type_of_permissions_path, notice: t('admin.type_of_permission.create.notice')
     else
-      render :new
+      render :new, t('admin.type_of_permission.create.alert')
     end
   end
 
@@ -27,9 +27,9 @@ class Administrator::TypeOfPermissionsController < ApplicationController
     @type_of_permission = TypeOfPermission.find(params[:id])
     authorize [:administrator, @type_of_permission]
     if @type_of_permission.update(permission_params)
-      redirect_to administrator_type_of_permissions_path, notice: "Turno actualizado correctamente."
+      redirect_to administrator_type_of_permissions_path, notice: t('admin.type_of_permission.update.notice')
     else
-      render :edit
+      render :edit, t('admin.type_of_permission.update.alert')
     end
   end
 
@@ -37,9 +37,9 @@ class Administrator::TypeOfPermissionsController < ApplicationController
     @type_of_permission = TypeOfPermission.find(params[:id])
     authorize [:administrator, @type_of_permission]
     if @type_of_permission.destroy
-      redirect_to administrator_type_of_permissions_path, notice: "Turno elimanado correctamente."
+      redirect_to administrator_type_of_permissions_path, notice: t('admin.type_of_permission.destroy.notice')
     else
-      redirect_to administrator_type_of_permissions_path, alert: "No se ha podido eliminar el turno"
+      redirect_to administrator_type_of_permissions_path, alert: t('admin.type_of_permission.destroy.alert')
     end
   end
 
