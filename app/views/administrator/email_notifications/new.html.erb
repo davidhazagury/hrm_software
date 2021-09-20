@@ -1,5 +1,5 @@
 <%= simple_form_for [:administrator,@alert] do |f| %>
   <%= f.input :notification, required:true %>
   <%= f.input :description, required: true %>
-  <%= f.submit "Añadir" %>
+  <%= f.submit t('components.buttons.add') %>
 <% end %>

@@ -1,4 +1,4 @@
 <%= simple_form_for [:administrator, @level] do |f| %>
   <%= f.input :type_of_level, required:true %>
-  <%= f.submit "Añadir", class: "btn btn_cta"  %>
+  <%= f.submit t('components.buttons.add')  %>
 <% end %>

@@ -1,4 +1,4 @@
 <%= simple_form_for [ @worker, @note ] do |f| %>
   <%= f.input :content, required: true %>
-  <%= f.button :button %>
+  <%= f.submit t('components.buttons.update') %>
 <% end %>

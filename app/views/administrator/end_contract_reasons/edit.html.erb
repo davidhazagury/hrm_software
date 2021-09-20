@@ -1,4 +1,4 @@
 <%= simple_form_for [:administrator, @reason] do |f| %>
   <%= f.input :name_of_end_reason, required:true %>
-  <%= f.submit "Actualizar", class: "btn btn_cta"  %>
+  <%= f.submit t('components.buttons.update')  %>
 <% end %>
