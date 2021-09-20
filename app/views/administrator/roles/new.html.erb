@@ -1,4 +1,4 @@
 <%= simple_form_for [:administrator, @role] do |f| %>
   <%= f.input :role_name, required: true %>
-  <%= f.submit "Añadir", class: "btn btn_cta"  %>
+  <%= f.submit t('components.buttons.add')  %>
 <% end %>

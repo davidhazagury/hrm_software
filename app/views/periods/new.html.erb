@@ -1,4 +1,4 @@
 <%= simple_form_for @period do |f| %>
   <%= f.select :year, Time.now.year-3...Time.now.year+1 ,required: true %>
-  <%= f.button :button %>
+  <%= f.submit t('components.buttons.add') %>
 <% end %>

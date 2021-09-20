@@ -3,5 +3,5 @@
   <%= f.input :last_name, required: true %>
   <%= f.input :email, required: true %>
   <%= f.association :roles,label_method: :role_name, value_method: :id, :as => :check_boxes %>
-  <%= f.submit "Añadir", class: "btn btn_cta"  %>
+  <%= f.submit t('components.buttons.add')  %>
 <% end %>

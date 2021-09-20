@@ -22,7 +22,5 @@
   <%= f.input :annual_salary, label:"Salario bruto anual (en €):", input_html: {type:'text', pattern:"^[0-9]*$", title:'Sólo se admiten caratéres numéricos'},  required: true %>
   <%= f.file_field :avatar,  label:"Foto:", accept:'image/png, image/jpg' %>
   <%= f.file_field :files,  label:"Documentación:", multiple: true %>
-  <%= f.button :button, class: "btn btn_cta" do %>
-    <i class="lni lni-plus"></i> Ficha
-  <% end %>
+  <%= f.submit t('components.buttons.add')  %>
 <% end %>
