@@ -2,10 +2,10 @@
   <% @users.each do |user| %>
     <li>
       <%= user.first_name %> <%= user.last_name %> <%= user.roles.first.role_name %> <%= user.email %>
-      <%= link_to 'Actualizar', administrator_edit_user_path(user) %>
-      <%= link_to 'Eliminar', administrator_delete_user_path(user), data: {:confirm =>'¿Eliminar este usuario?'},method: :delete  %>
+      <%= link_to t('components.links.update'), administrator_edit_user_path(user) %>
+      <%= link_to t('components.links.destroy'), administrator_delete_user_path(user), data: {:confirm => t('components.links.data.confirm')},method: :delete  %>
     </li>
   <% end %>
 </ol>
 
-<%= link_to "Cerrar sesión", destroy_user_session_path, :method => :delete  %>
+<%= link_to t('components.links.log_out'), destroy_user_session_path, :method => :delete  %>

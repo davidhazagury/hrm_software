@@ -6,7 +6,7 @@ Notas de: <%= @worker.first_name %>
         <ul>
           <li>C<%= n.content %>
             <% if policy(Note).destroy? %>
-              <%= link_to "Eliminar", note_path(n), method: :delete, data: {confirm:'Estas seguro?'}  %>
+              <%= link_to t('components.links.destroy'), note_path(n), method: :delete, data: {confirm: t('components.links.data.confirm')}  %>
             <% end %>
             </li>
 
