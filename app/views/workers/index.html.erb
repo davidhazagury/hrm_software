@@ -11,8 +11,8 @@
         <%= image_tag "avatars/#{worker.set_avatar}", alt: "alttext", style:"height: 35px; border-radius: 50%; width: 65px;" %>
       <% end %>
       <%= worker.first_name %>
-      <%= link_to t('view'), worker_path(worker)  %>
+      <%= link_to t('components.links.view'), worker_path(worker)  %>
     </li>
   <% end %>
 </ol>
-<%= link_to t('log out'), destroy_user_session_path, :method => :delete  %>
+<%= link_to t('components.links.log_out'), destroy_user_session_path, :method => :delete  %>
