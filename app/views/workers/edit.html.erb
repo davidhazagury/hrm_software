@@ -22,5 +22,5 @@
   <%= f.input :annual_salary, label:t('model.columns.salary'), input_html: {type:'text', pattern:"^[0-9]*$", title:'Sólo se admiten caratéres numéricos'},  required: true %>
   <%= f.file_field :avatar,  label:t('model.columns.avatar'), accept:'image/png, image/jpg' %>
   <%= f.file_field :files,  label:t('model.columns.documents'), multiple: true %>
-  <%= f.submit t('components.buttons.add')  %>
+  <%= f.submit t('components.buttons.update')  %>
 <% end %>

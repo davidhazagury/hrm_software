@@ -4,7 +4,7 @@ Notas de: <%= @worker.first_name %>
   <% @notes.each do |n| %>
     <li>
         <ul>
-          <li>C<%= n.content %>
+          <li><%= t('model.columns.content') %>: <%= n.content %>
             <% if policy(Note).destroy? %>
               <%= link_to t('components.links.destroy'), note_path(n), method: :delete, data: {confirm: t('components.links.data.confirm')}  %>
             <% end %>

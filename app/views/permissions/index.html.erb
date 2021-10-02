@@ -4,10 +4,10 @@ Permisos de: <%= @worker.first_name %>
   <% @permissions.each do |p| %>
     <li>
         <ul>
-          <li>Comienzo: <%= p.permission_start_date %> </li>
-          <li>Reincorporación: <%= p.permission_rejoin_date %> </li>
-          <li>Comentarios: <%= p.comment %> </li>
-          <li>Parte entregado: <%= p.note %> </li>
+          <li><%= t('model.columns.start_date_permission') %>: <%= p.permission_start_date %> </li>
+          <li><%= t('model.columns.rejoin_date_permission') %>: <%= p.permission_rejoin_date %> </li>
+          <li><%= t('model.columns.comment') %>: <%= p.comment %> </li>
+          <li><%= t('model.columns.note_permission') %>: <%= p.note %> </li>
         </ul>
     </li>
   <% end %>

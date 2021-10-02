@@ -4,12 +4,12 @@ Bajas de: <%= @worker.first_name %>
   <% @sicks.each do |s| %>
     <li>
         <ul>
-          <li>Comienzo: <%= s.start_date_sickness %> </li>
-          <li>Reincorporación: <%= s.rejoin_date_sickness %> </li>
-          <li>Comentarios: <%= s.comment %> </li>
-          <li>Parte baja: <%= s.doctor_note_sickeness %> </li>
-          <li>Parte alta: <%= s.rejoin_note_sickeness %> </li>
-          <li>Tipo: <%= s.type_of_sickness %> </li>
+          <li><%= t('model.columns.start_date_sickness') %>: <%= s.start_date_sickness %> </li>
+          <li><%= t('model.columns.rejoin_date_sickness') %>: <%= s.rejoin_date_sickness %> </li>
+          <li><%= t('model.columns.comment') %>: <%= s.comment %> </li>
+          <li><%= t('model.columns.doctor_note') %>: <%= s.doctor_note_sickeness %> </li>
+          <li><%= t('model.columns.rejoin_note') %>: <%= s.rejoin_note_sickeness %> </li>
+          <li><%= t('model.columns.type_of_sickness') %>: <%= s.type_of_sickness %> </li>
         </ul>
     </li>
   <% end %>
