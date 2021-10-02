@@ -1,4 +1,4 @@
 <%= simple_form_for [ @worker, @note ] do |f| %>
-  <%= f.input :content, required: true %>
+  <%= f.input :content, label:t('model.columns.content'),required: true %>
   <%= f.submit t('components.buttons.add') %>
 <% end %>
