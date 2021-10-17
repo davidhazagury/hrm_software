@@ -1,6 +1,6 @@
 class Worker < ApplicationRecord
   # ***** VALIDATIONS ****
-  validates :first_name, presence: true
+  #validates :first_name, presence: true
   validates :last_name, presence: true
   validates :birth_date, presence: true
   validates :start_date, presence: true
