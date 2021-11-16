@@ -4,12 +4,12 @@ class Service::CompaniesController < ApplicationController
     skip_authorization
     @company = Company.new
   end
+
   def create
     skip_authorization
     @company = Company.new(company_params)
-    raise
     if @company.save
-      redirect_to workers_path
+      # SEND EMAIL CONFIRMATION DEVISE CONFIRMATION!
     else
       render :new
     end
