@@ -1,0 +1,2 @@
+module Service::PagesHelper
+end

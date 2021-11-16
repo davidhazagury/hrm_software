@@ -1,0 +1,8 @@
+<h1>LANDING PAGE</h1>
+
+<%= link_to t('components.links.new_company'), new_service_company_path  %>
+<% if current_user %>
+  <%= link_to t('components.links.log_out'), destroy_user_session_path, :method => :delete  %>
+<% else %>
+  <%= link_to t('components.links.sign_in'), new_user_session_path  %>
+<% end %>
