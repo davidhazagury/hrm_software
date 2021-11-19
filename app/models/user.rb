@@ -9,7 +9,7 @@ class User < ApplicationRecord
   #We have turn on the timeout => which automatically logs the user out after 2 hours(set it by us), and the trackable
   #module to being able to track users.
   devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable, :registerable
 
   has_many :assignments
   has_many :roles, through: :assignments
