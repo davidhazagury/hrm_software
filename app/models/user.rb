@@ -40,4 +40,8 @@ class User < ApplicationRecord
       end
     end
   end
+ # We want the user to set its password after the email is confirmed
+  def password_required?
+    confirmed? ? super : false
+  end
 end
