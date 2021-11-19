@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_18_073724) do
+ActiveRecord::Schema.define(version: 2021_11_19_095148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -197,6 +197,8 @@ ActiveRecord::Schema.define(version: 2021_11_18_073724) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -232,7 +234,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_073724) do
     t.integer "previous_year_vacation_counter", default: 0
     t.bigint "type_of_shift_id"
     t.bigint "work_center_id", default: 1
-    t.bigint "company_id", default: 1
+    t.bigint "company_id"
     t.bigint "position_id"
     t.string "created_by"
     t.string "modified_by"
@@ -275,6 +277,7 @@ ActiveRecord::Schema.define(version: 2021_11_18_073724) do
   add_foreign_key "permissions", "type_of_permissions"
   add_foreign_key "permissions", "workers"
   add_foreign_key "sicks", "workers"
+  add_foreign_key "users", "companies"
   add_foreign_key "workers", "areas"
   add_foreign_key "workers", "companies"
   add_foreign_key "workers", "departments"
