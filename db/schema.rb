@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_19_095148) do
+ActiveRecord::Schema.define(version: 2021_11_22_174708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,8 +113,8 @@ ActiveRecord::Schema.define(version: 2021_11_19_095148) do
     t.string "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "worker_id"
-    t.index ["worker_id"], name: "index_notes_on_worker_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "periods", force: :cascade do |t|
@@ -126,14 +126,14 @@ ActiveRecord::Schema.define(version: 2021_11_19_095148) do
   create_table "permissions", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "worker_id"
     t.boolean "note", default: false
     t.string "comment"
     t.date "permission_start_date"
     t.date "permission_rejoin_date"
     t.bigint "type_of_permission_id"
+    t.bigint "user_id"
     t.index ["type_of_permission_id"], name: "index_permissions_on_type_of_permission_id"
-    t.index ["worker_id"], name: "index_permissions_on_worker_id"
+    t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -151,14 +151,14 @@ ActiveRecord::Schema.define(version: 2021_11_19_095148) do
   create_table "sicks", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "worker_id"
     t.boolean "doctor_note_sickeness", default: false
     t.boolean "rejoin_note_sickeness", default: false
     t.string "comment"
     t.date "start_date_sickness"
     t.date "rejoin_date_sickness"
     t.string "type_of_sickness"
-    t.index ["worker_id"], name: "index_sicks_on_worker_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_sicks_on_user_id"
   end
 
   create_table "type_of_contracts", force: :cascade do |t|
@@ -198,32 +198,14 @@ ActiveRecord::Schema.define(version: 2021_11_19_095148) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.bigint "company_id"
-    t.index ["company_id"], name: "index_users_on_company_id"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  end
-
-  create_table "work_centers", force: :cascade do |t|
-    t.string "name_of_work_center"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "workers", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "first_name"
-    t.string "last_name"
+    t.string "type"
     t.date "birth_date"
     t.date "end_date"
     t.string "sin_num"
     t.string "personal_email"
-    t.string "ga_email"
     t.string "id_num"
     t.string "phone_number"
     t.string "bank_account"
-    t.string "job"
     t.integer "annual_salary"
     t.boolean "active", default: true
     t.integer "vacation_counter", default: 0
@@ -233,39 +215,29 @@ ActiveRecord::Schema.define(version: 2021_11_19_095148) do
     t.bigint "genre_id"
     t.integer "previous_year_vacation_counter", default: 0
     t.bigint "type_of_shift_id"
-    t.bigint "work_center_id", default: 1
-    t.bigint "company_id"
+    t.bigint "work_center_id"
     t.bigint "position_id"
     t.string "created_by"
     t.string "modified_by"
-    t.bigint "group_id"
-    t.bigint "level_id"
-    t.bigint "area_id"
-    t.integer "worker_number"
-    t.integer "notice_period"
-    t.string "type_of_street"
-    t.string "street_name"
-    t.string "street_number"
-    t.string "building_door"
-    t.string "building_stair"
-    t.string "building_floor"
-    t.string "floor_door"
-    t.string "province"
-    t.string "state"
-    t.string "postal_code"
     t.date "start_date"
     t.bigint "end_contract_reason_id"
-    t.index ["area_id"], name: "index_workers_on_area_id"
-    t.index ["company_id"], name: "index_workers_on_company_id"
-    t.index ["department_id"], name: "index_workers_on_department_id"
-    t.index ["end_contract_reason_id"], name: "index_workers_on_end_contract_reason_id"
-    t.index ["genre_id"], name: "index_workers_on_genre_id"
-    t.index ["group_id"], name: "index_workers_on_group_id"
-    t.index ["level_id"], name: "index_workers_on_level_id"
-    t.index ["position_id"], name: "index_workers_on_position_id"
-    t.index ["type_of_contract_id"], name: "index_workers_on_type_of_contract_id"
-    t.index ["type_of_shift_id"], name: "index_workers_on_type_of_shift_id"
-    t.index ["work_center_id"], name: "index_workers_on_work_center_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["department_id"], name: "index_users_on_department_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["end_contract_reason_id"], name: "index_users_on_end_contract_reason_id"
+    t.index ["genre_id"], name: "index_users_on_genre_id"
+    t.index ["position_id"], name: "index_users_on_position_id"
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["type_of_contract_id"], name: "index_users_on_type_of_contract_id"
+    t.index ["type_of_shift_id"], name: "index_users_on_type_of_shift_id"
+    t.index ["work_center_id"], name: "index_users_on_work_center_id"
+  end
+
+  create_table "work_centers", force: :cascade do |t|
+    t.string "name_of_work_center"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -273,20 +245,16 @@ ActiveRecord::Schema.define(version: 2021_11_19_095148) do
   add_foreign_key "assign_email_notifications", "users"
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
-  add_foreign_key "notes", "workers"
+  add_foreign_key "notes", "users"
   add_foreign_key "permissions", "type_of_permissions"
-  add_foreign_key "permissions", "workers"
-  add_foreign_key "sicks", "workers"
+  add_foreign_key "permissions", "users"
+  add_foreign_key "sicks", "users"
   add_foreign_key "users", "companies"
-  add_foreign_key "workers", "areas"
-  add_foreign_key "workers", "companies"
-  add_foreign_key "workers", "departments"
-  add_foreign_key "workers", "end_contract_reasons"
-  add_foreign_key "workers", "genres"
-  add_foreign_key "workers", "groups"
-  add_foreign_key "workers", "levels"
-  add_foreign_key "workers", "positions"
-  add_foreign_key "workers", "type_of_contracts"
-  add_foreign_key "workers", "type_of_shifts"
-  add_foreign_key "workers", "work_centers"
+  add_foreign_key "users", "departments"
+  add_foreign_key "users", "end_contract_reasons"
+  add_foreign_key "users", "genres"
+  add_foreign_key "users", "positions"
+  add_foreign_key "users", "type_of_contracts"
+  add_foreign_key "users", "type_of_shifts"
+  add_foreign_key "users", "work_centers"
 end

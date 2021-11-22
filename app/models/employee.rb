@@ -1,14 +1,14 @@
-class Worker < ApplicationRecord
+class Employee < User
   # ***** VALIDATIONS ****
+  # FIRST NAME AND LAST NAME ARE ALREADY VALIDATED IN THE USER CLASS
   #validates :first_name, presence: true
-  validates :last_name, presence: true
+  #validates :last_name, presence: true
   validates :birth_date, presence: true
   validates :start_date, presence: true
   # SIN Number has to be only numbers and unique.
   validates :sin_num, presence: true, uniqueness: true, format: { with: /[0-9]{1,45}/, message: " Número SS introducido en formato inválido" },
                                                         length: { minimum: 8, message:  "Mínimo de caractéres debe ser 8" }
   validates :personal_email, presence: true, uniqueness: true
-  validates :ga_email, presence: true, uniqueness: true, format: {with:/[a-zA-Z0-9_.+-]+@(?:(?:[a-zA-Z0-9-]+\.)?[a-zA-Z]+\.)?(globalalumni)\.org/, message:'Introducir email válido'}
   validates :id_num, presence: true, uniqueness: true, format: {with:/([A-Z]|[0-9])[0-9]{7}([A-Z])/, message:'Introducir DNI ó NIE válido'}
   validates :phone_number, presence: true, uniqueness: true, format: {with:/(6|7)([0-9]){8}/, message:'Introducir número válido'}
   validates :bank_account, presence: true, uniqueness: true, format: {with:/([A-Z]{2})([0-9]{22})/, message:'Introducir IBAN válido'}
@@ -35,11 +35,6 @@ class Worker < ApplicationRecord
 
   before_create :set_vacations
 
-  def set_company_and_work_center
-    self.company_id = 1
-    self.work_center_id = 1
-  end
-
   def set_avatar
     # List avatars available in the assets folder (returns an array with the paths)
     avatars = Dir.glob('app/assets/images/avatars/*')
@@ -65,6 +60,5 @@ class Worker < ApplicationRecord
   private
 
   def set_vacations
-
   end
 end
