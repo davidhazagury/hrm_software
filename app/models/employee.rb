@@ -21,15 +21,15 @@ class Employee < User
   has_many :notes
   has_one_attached :avatar
   has_many_attached :files
-  belongs_to :area
+  #belongs_to :area
   belongs_to :department
   belongs_to :genre
-  belongs_to :group
-  belongs_to :level
+  #belongs_to :group
+  #belongs_to :level
   belongs_to :position
   belongs_to :type_of_contract
   belongs_to :type_of_shift
-  belongs_to :work_center
+  #belongs_to :work_center
   belongs_to :end_contract_reason, optional: true
 
   before_create :set_vacations
