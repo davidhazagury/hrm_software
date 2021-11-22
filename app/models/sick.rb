@@ -4,7 +4,7 @@ class Sick < ApplicationRecord
   validates :comment, presence: true, length: { minimum: 15, maximum: 30 }
   # Rejoin date must be greater than the start date
   validate :check_dates
-  belongs_to :worker
+  belongs_to :user
 
   private
 

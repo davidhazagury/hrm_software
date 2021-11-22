@@ -5,7 +5,7 @@ class Administrator::UsersManagementController < ApplicationController
   after_action :send_welcome_email_to_user, only: [:create]
   before_action :destroy_assignments_associated_to_user, only: [:destroy]
   def index
-    @users = User.all
+    @users = User.where(company_id: current_user.company_id)
   end
 
   def new

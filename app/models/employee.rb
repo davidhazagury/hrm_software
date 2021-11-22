@@ -22,7 +22,6 @@ class Employee < User
   has_one_attached :avatar
   has_many_attached :files
   belongs_to :area
-  belongs_to :company
   belongs_to :department
   belongs_to :genre
   belongs_to :group

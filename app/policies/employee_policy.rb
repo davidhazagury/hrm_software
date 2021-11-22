@@ -1,4 +1,4 @@
-class WorkerPolicy < ApplicationPolicy
+class EmployeePolicy < ApplicationPolicy
   # Only site admins adn HR Admins can CUD Workers
   #Show is allow for all types of users
   class Scope < Scope
@@ -32,5 +32,4 @@ class WorkerPolicy < ApplicationPolicy
   def show?
     true
   end
-
 end
