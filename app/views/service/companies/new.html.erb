@@ -1,0 +1,10 @@
+<H1>NUEVA COMPAÑIA</H1>
+<%= simple_form_for [ :service, @company ] do |f| %>
+  <%= f.input :name_of_company, label:t('model.columns.name_of_company'), required: true %>
+  <%= f.input :first_name_company_contact, label: t('model.columns.first_name_company_contact'), required: true %>
+  <%= f.input :last_name_company_contact,label:t('model.columns.last_name_company_contact'), required: true  %>
+  <%= f.input :number_of_employees_company, label: t('model.columns.number_of_employees_company'), required: true %>
+  <%= f.input :email_company_contact, label: t('model.columns.email_company_contact'), required: true %>
+  <%= f.input :phone_company_contact, label: t('model.columns.phone_company_contact') %>
+  <%= f.submit t('components.buttons.add') %>
+<% end %>

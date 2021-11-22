@@ -4,17 +4,19 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
   validates :roles, presence: true
+  validates :company, presence: true
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   #We have turn on the timeout => which automatically logs the user out after 2 hours(set it by us), and the trackable
   #module to being able to track users.
   devise :database_authenticatable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   has_many :assignments
   has_many :roles, through: :assignments
   has_many :assign_email_notifications
   has_many :email_notifications, through: :assign_email_notifications
+  belongs_to :company
   def role?(role)
     roles.any? { |r| r.role_name.underscore.to_sym == role }
   end
@@ -39,5 +41,9 @@ class User < ApplicationRecord
         AssignEmailNotification.create(user_id: self.id, email_notification_id: en.id)
       end
     end
+  end
+ # We want the user to set its password after the email is confirmed
+  def password_required?
+    confirmed? ? super : false
   end
 end
