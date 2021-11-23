@@ -12,9 +12,12 @@ class User < ApplicationRecord
   devise :database_authenticatable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  has_many :assignments
+  has_many :assignments, dependent: :destroy
   has_many :roles, through: :assignments
   has_many :assign_email_notifications
+  has_many :permissions, dependent: :destroy
+  has_many :sicks, dependent: :destroy
+  has_many :notes, dependent: :destroy
   has_many :email_notifications, through: :assign_email_notifications
   belongs_to :company
   def role?(role)

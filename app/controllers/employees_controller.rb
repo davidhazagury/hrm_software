@@ -14,7 +14,13 @@ class EmployeesController < ApplicationController
     assign_company_to_new_employe
     authorize @employee
     if @employee.save!
-      redirect_to employees_path, notice: t('general_alerts.notice')
+      if folder_created_in_Aws_for_new_employee?
+        redirect_to employees_path, notice: t('general_alerts.notice')
+      else
+        # If the folder doesnt get created, we delete de employee we have created
+        @employee.destroy
+        render :new, alert: t('general_alerts.alert')
+      end
     else
       render :new, alert: t('general_alerts.alert')
     end
@@ -43,4 +49,16 @@ class EmployeesController < ApplicationController
       @employee.email = @employee.personal_email
     end
   end
+
+  def folder_created_in_Aws_for_new_employee?
+    c = Aws::S3::Client.new(region: 'eu-west-1', access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['SECRET_ACCESS_KEY'])
+    bucket_name = "#{@employee.company.name_of_company.parameterize}-#{@employee.company.id}"
+    folder_name = "#{@employee.first_name.parameterize}-#{@employee.last_name.parameterize}-#{@employee.id}-#{@employee.id_num}/"
+    response = c.put_object(bucket: bucket_name, key:folder_name)
+    if response != nil
+      return true
+    else
+      return false
+    end
+   end
 end
