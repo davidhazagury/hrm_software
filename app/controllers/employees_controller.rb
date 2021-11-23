@@ -20,6 +20,11 @@ class EmployeesController < ApplicationController
     end
   end
 
+  def show
+    @employee = Employee.find(params[:id])
+    authorize @employee
+  end
+
   private
 
   def employee_params
