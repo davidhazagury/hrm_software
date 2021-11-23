@@ -1,0 +1,24 @@
+<h1>Employee: <%= @employee.first_name %> <%= @employee.last_name %></h1>
+<ul>
+  <li> <%= @employee.department.name_of_department %> </li>
+  <li> <%= @employee.position.name_of_position %> </li>
+  <li> <%= @employee.sin_num %> </li>
+  <li> <%= @employee.phone_number %> </li>
+  <li> <%= @employee.email %> </li>
+  <li> <%= @employee.personal_email %> </li>
+  <li> <%= @employee.birth_date %> </li>
+  <li> <%= @employee.id_num %> </li>
+  <li> <%= @employee.bank_account %> </li>
+  <li> <%= @employee.genre.type_of_genre %></li>
+  <li><%= @employee.start_date %></li>
+  <li><%= @employee.type_of_contract.name_type_of_contract %></li>
+  <li><%= @employee.type_of_shift.name_of_shift %></li>
+</ul>
+<% if @employee.avatar.attached? %>
+  <div style="background-image: url(<%= rails_blob_url(@employee.avatar) %>);background-position: center;
+              background-size: cover;    height: 35px; border-radius: 50%; width: 35px;">
+
+  </div>
+<% else %>
+  <%= image_tag "avatars/#{@employee.set_avatar}", alt: "alttext", style:"height: 35px; border-radius: 50%; width: 65px;" %>
+<% end %>

@@ -1,10 +1,14 @@
 <h1>Employees</h1>
 <ul>
   <% @employees.each do |e| %>
-    <%= e.first_name %>
-    <%= e.last_name %>
-    <%= e.confirmed? %>
-    <%= e.department.name_of_department %>
+    <li>
+      <%= link_to employee_path(e) do  %>
+        <%= e.first_name %>
+        <%= e.last_name %>
+        <%= e.confirmed? %>
+        <%= e.department.name_of_department %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 <%= link_to 'New Employee', new_employee_path  %>
