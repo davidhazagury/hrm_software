@@ -27,7 +27,13 @@ class EmployeePolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    # We verify that the employee the user is trying to access to,
+    # belongs to the same company
+    if user.company_id == record.company_id
+      true
+    else
+      false
+    end
   end
 # DO WE NEED TO VERIFY FIRST (BEFORE_ACTION) THE USER IS CHECKING ITS COMPANY?
 end
