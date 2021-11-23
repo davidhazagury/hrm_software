@@ -16,9 +16,6 @@ class Employee < User
   validates :avatar, content_type: 'image/png',content_type: [:png, :jpg, :jpeg], limit: {min: 1, max: 1 }
   validates :files, content_type: [ :pdf, :doc, :docx, :xls, :xlsx], limit: {min:0, max: 7 }
   # **** RELATIONS ****
-  has_many :permissions
-  has_many :sicks
-  has_many :notes
   has_one_attached :avatar
   has_many_attached :files
   #belongs_to :area
