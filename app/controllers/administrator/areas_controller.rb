@@ -1,6 +1,6 @@
 class Administrator::AreasController < ApplicationController
   def index
-    @areas = policy_scope([:administrator,Area.order(:type_of_area)])
+    @areas = policy_scope([:administrator, Area.order(:type_of_area)])
   end
   def new
     @area = Area.new
