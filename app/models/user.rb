@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   after_create :assign_user_to_email_notifications
+  #before_action :verify_subscription, :if => :user_signed_in?
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
@@ -20,16 +21,9 @@ class User < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :email_notifications, through: :assign_email_notifications
   belongs_to :company
+
   def role?(role)
     roles.any? { |r| r.role_name.underscore.to_sym == role }
-  end
-
-  def set_users_password
-    number_chain = []
-    5.times do
-      number_chain.push((0...9).to_a.sample())
-    end
-    return "#{first_name}#{number_chain.join("")}"
   end
 
   private
@@ -48,5 +42,8 @@ class User < ApplicationRecord
  # We want the user to set its password after the email is confirmed
   def password_required?
     confirmed? ? super : false
+  end
+
+  def verify_subscription
   end
 end

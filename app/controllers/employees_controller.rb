@@ -4,6 +4,7 @@ class EmployeesController < ApplicationController
     @employees = policy_scope(Employee.where(company_id: current_user.company_id))
     if params[:payment].present?
       params[:payment] == 'succeeded' ? flash.notice = t('general_alerts.notice') : flash.alert = t('general_alerts.alert')
+      raise
     end
     authorize @employees
   end

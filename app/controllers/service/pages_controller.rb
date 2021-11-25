@@ -6,5 +6,6 @@ class Service::PagesController < ApplicationController
 
   def welcome
     skip_authorization
+    raise
   end
 end

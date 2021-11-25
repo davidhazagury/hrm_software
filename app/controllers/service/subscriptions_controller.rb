@@ -11,6 +11,11 @@ class Service::SubscriptionsController < ApplicationController
       stripe = Stripe::Checkout::Session.create({
         success_url: employees_url(:payment=> 'succeeded'),
         cancel_url: employees_url(:payment=> 'cancelled'),
+        customer_email: current_user.company.email_company_contact,
+        metadata: {
+          'company_name': current_user.company.name_of_company,
+          'company_contact': "#{current_user.company.first_name_company_contact} #{current_user.company.last_name_company_contact}"
+        },
         line_items: [
           {price: 'price_1JyvQsLDzVZpGFZEC5BVTpPD', quantity: 1},
         ],
@@ -41,6 +46,7 @@ class Service::SubscriptionsController < ApplicationController
       # Something else happened, completely unrelated to Stripe
     end
     if stripe != nil && e == nil
+      raise
       redirect_to "#{stripe.url}"
     else
       redirect_to employees_path, alert: t('general_alerts.alert')
