@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :notes, dependent: :destroy
   has_many :email_notifications, through: :assign_email_notifications
   belongs_to :company
+
   def role?(role)
     roles.any? { |r| r.role_name.underscore.to_sym == role }
   end

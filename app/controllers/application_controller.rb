@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  # Before any action, we check if the company has a trial period activated
+  before_action :has_free_trial_activated?, if: :current_user
   include Pundit
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   # Pundit: white-list approach.
@@ -25,6 +27,12 @@ class ApplicationController < ActionController::Base
   end
 
 private
+
+  def has_free_trial_activated?
+    if DateTime.now > current_user.company.trial_ended_at
+      render template: 'service/pages/welcome'
+    end
+  end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
