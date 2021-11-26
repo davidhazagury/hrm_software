@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_174708) do
+ActiveRecord::Schema.define(version: 2021_11_26_063354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,11 @@ ActiveRecord::Schema.define(version: 2021_11_22_174708) do
     t.string "email_company_contact"
     t.string "phone_company_contact"
     t.integer "number_of_employees_company"
+    t.datetime "trial_started_at"
+    t.datetime "trial_ended_at"
+    t.boolean "company_account_activated", default: true
+    t.boolean "free_trial_period_activated", default: true
+    t.integer "free_trial_period_days"
   end
 
   create_table "departments", force: :cascade do |t|
