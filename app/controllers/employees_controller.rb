@@ -1,6 +1,11 @@
 class EmployeesController < ApplicationController
+  before_action :company_subcribed, only: :index, if: ->{params[:payment].present?}
   def index
     @employees = policy_scope(Employee.where(company_id: current_user.company_id))
+    if params[:payment].present?
+      params[:payment] == 'succeeded' ? flash.notice = t('general_alerts.notice') : flash.alert = t('general_alerts.alert')
+      raise
+    end
     authorize @employees
   end
 
@@ -13,7 +18,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new(employee_params)
     assign_company_to_new_employe
     authorize @employee
-    if @employee.save!
+    if @employee.save
       if folder_created_in_Aws_for_new_employee?
         redirect_to employees_path, notice: t('general_alerts.notice')
       else
@@ -60,5 +65,9 @@ class EmployeesController < ApplicationController
     else
       return false
     end
+   end
+
+   def company_subcribed
+    # UPDATE COMPANY'S DATA OF SUBSCRIPTION
    end
 end

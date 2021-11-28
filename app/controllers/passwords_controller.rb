@@ -1,5 +1,6 @@
 class PasswordsController < Devise::PasswordsController
   private
+
   def after_resetting_password_path_for(resource)
     sign_in(resource) # In case you want to sign in the user
     if resource.company.users.size <= 1
@@ -7,6 +8,7 @@ class PasswordsController < Devise::PasswordsController
     end
     employees_path
   end
+
   def create_bucket(user)
     # Create a bucket for eac company that sign's up. When do we create it? when the user is confirmed? When the company is created?
     c = Aws::S3::Client.new(region: 'eu-west-1', access_key_id: ENV['AWS_ACCESS_KEY_ID'], secret_access_key: ENV['SECRET_ACCESS_KEY'])
